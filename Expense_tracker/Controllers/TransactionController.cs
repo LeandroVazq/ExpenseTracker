@@ -25,11 +25,11 @@ namespace Expense_tracker.Controllers
             return View(await applicationDbContext.ToListAsync());
         }
 
-        // GET: Transaction/AddOrCreate
-        public IActionResult AddOrCreate()
+        // GET: Transaction/AddOrEdit
+        public IActionResult AddOrEdit()
         {
             ViewData["CategoryID"] = new SelectList(_context.Categories, "CategoryId", "CategoryId");
-            return View();
+            return View(new Transaction());
         }
 
         // POST: Transaction/Create
