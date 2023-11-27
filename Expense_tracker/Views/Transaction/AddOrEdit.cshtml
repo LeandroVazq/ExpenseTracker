@@ -23,7 +23,7 @@
                     @*ddlCategory  = DropDownListCategory*@
 
                     <ejs-dropdownlist id="ddlCategory"   ejs-for="CategoryID"  dataSource="@ViewBag.Categories" 
-                    placeholder="Category" floatLabelType="Always">
+                    placeholder="Category" floatLabelType="Always" allowFiltering="true" ignoreAccent="true" filterType="Contains" popupHeight="220px">
                 
                         <e-dropdownlist-fields value="CategoryId" text="IconWithTitle"></e-dropdownlist-fields>
                 
@@ -33,15 +33,14 @@
 
 
                 <div class="mb-3">
-                    <label asp-for="Amount" class="control-label"></label>
-                    <input asp-for="Amount" class="form-control" />
+                    <ejs-numerictextbox id="amount" value="0" Type="text" ejs-for="Amount" placeholder="Amount" floatLabelType="Always" 
+                    min="0" format="c0"></ejs-numerictextbox>
                     <span asp-validation-for="Amount" class="text-danger"></span>
                 </div>
 
 
                 <div class="mb-3">
-                    <label asp-for="Note" class="control-label"></label>
-                    <input asp-for="Note" class="form-control" />
+                    <ejs-textbox id="note" placeholder="Comments" ejs-for="Note" floatLabelType="Always" multiline="true"></ejs-textbox>
                     <span asp-validation-for="Note" class="text-danger"></span>
                 </div>
 
