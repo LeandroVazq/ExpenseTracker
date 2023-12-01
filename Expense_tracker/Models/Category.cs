@@ -10,6 +10,7 @@ namespace Expense_tracker.Models
 
 
         [Column(TypeName = "nvarchar(50)")]
+        [Required(ErrorMessage ="Title is required")]
         public string Title { get; set; }
 
 

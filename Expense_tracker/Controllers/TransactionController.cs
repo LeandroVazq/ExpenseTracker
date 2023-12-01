@@ -26,10 +26,15 @@ namespace Expense_tracker.Controllers
         }
 
         // GET: Transaction/AddOrEdit
-        public IActionResult AddOrEdit()
+        public IActionResult AddOrEdit(int id = 0)
         {
             PopulateCategory();
-            return View(new Transaction());
+            if (id == 0)
+                return View(new Transaction());
+            else
+                return View(_context.Transactions.Find(id));
+            
+            
         }
 
         // POST: Transaction/Create
@@ -37,15 +42,18 @@ namespace Expense_tracker.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddOrCreate([Bind("TransactionId,CategoryID,Amount,Note,Date")] Transaction transaction)
+        public async Task<IActionResult> AddOrEdit([Bind("TransactionId,CategoryID,Amount,Note,Date")] Transaction transaction)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(transaction);
+                if (transaction.TransactionId == 0)           
+                   _context.Add(transaction);           
+                else               
+                   _context.Update(transaction);                             
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CategoryID"] = new SelectList(_context.Categories, "CategoryId", "CategoryId", transaction.CategoryID);
+            PopulateCategory();
             return View(transaction);
         }
 

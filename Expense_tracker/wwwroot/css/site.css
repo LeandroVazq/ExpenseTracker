@@ -18,6 +18,14 @@ html {
     font-family: "Inter"
 }
 
+/*Main-Content*/
+
+.main-content{
+    margin-left:290px
+}
+
+
+
 /*Breadcrumb*/
 
 .e-breadcrumb a, .e-breadcrumb a:hover {
