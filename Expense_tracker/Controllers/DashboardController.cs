@@ -26,7 +26,7 @@ namespace Expense_tracker.Controllers
 
             //Total income
 
-            int TotalIncome = SelectedTransactions.Where(i => i.Category.Type == "Income").Sum(j=>j.Amount);
+            int TotalIncome = SelectedTransactions.Where(a=>a.Category.Type == "Income").Sum(a=>a.Amount);
             ViewBag.TotalIncome = TotalIncome.ToString("C0");
 
             //Total Expense
@@ -36,7 +36,19 @@ namespace Expense_tracker.Controllers
             //Balance 
 
             int Balance = TotalIncome - TotalExpense;
-            ViewBag.Balance = Balance.ToString("C0");
+            ViewBag.TotalBalance = Balance.ToString("C0");
+
+            //ViewBag Doughnut chart- Expense by category
+
+            ViewBag.DoughnutChartData = SelectedTransactions.Where(e => e.Category.Type == "Expense").
+                GroupBy(j => j.Category.CategoryId).
+                Select(k => new
+                    {
+                        categoryTitleWithIcon = k.First().Category.Icon + " " + k.First().Category.Title,
+                        amount=k.Sum(j=>j.Amount),
+                        formattedAmount = k.Sum(j=>j.Amount).ToString("C0"),
+                    }
+                ).ToList();
 
             return View();
         }
