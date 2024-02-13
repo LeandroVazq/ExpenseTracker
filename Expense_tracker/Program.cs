@@ -1,6 +1,9 @@
 using Expense_tracker.Models;
 using Microsoft.EntityFrameworkCore;
 
+// Variable with SyncFusion Licence
+
+string LicenceKey = Environment.GetEnvironmentVariable("SYNCFUSION_LICENCE_KEY");
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,7 +12,7 @@ builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 builder.Services.AddControllersWithViews();
 
 // SyncFusion license 
-Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Mgo+DSMBMAY9C3t2VlhhQlJCfV5AQmBIYVp/TGpJfl96cVxMZVVBJAtUQF1hSn9Sd0xiWHtZdHRTRGhb");
+Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense(LicenceKey);
 
 
 
